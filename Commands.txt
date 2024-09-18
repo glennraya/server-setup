@@ -1,0 +1,71 @@
+// Create SUDO User
+adduser username
+
+usermod -aG sudo username
+
+// Generate SSH Key Pair
+ssh-keygen -t ecdsa -b 521
+
+// Install PHP and Extensions
+sudo apt update
+sudo add-apt-repository ppa:ondrej/php
+sudo apt install php8.3-cli
+sudo apt install php8.3-common php8.3-bcmath php8.3-mbstring php8.3-xml php8.3-curl php8.3-gd php8.3-zip php8.3-mysql
+
+// Check PHP installed modules
+php8.3 -m
+
+// Install Composer
+sudo apt install composer
+
+// Install MySQL/Secure Installation
+sudo apt install mysql-server
+sudo mysql_secure_installation
+
+// Setup Database and User
+CREATE DATABASE yourdatabase;
+CREATE USER 'your-username'@'localhost' IDENTIFIED BY 'your-password';
+GRANT ALL PRIVILEGES ON yourdatabase.* TO 'your-username'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+// Install NVM/NodeJS
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+nvm --version
+
+nvm install --lts
+
+// Taking directory ownership
+sudo chown -R username /directory-name
+
+// Taking file ownership
+sudo chown username filename
+
+// Proper Directory Permissions (Navigate to your project root directory)
+sudo chown -R $USER:www-data .
+
+sudo find . -type f -exec chmod 664 {} \;
+
+sudo find . -type d -exec chmod 775 {} \;
+
+sudo chgrp -R www-data storage bootstrap/cache
+
+sudo chmod -R ug+rwx storage bootstrap/cache
+
+// Install Certbot
+sudo apt install certbot python3-certbot-nginx
+
+// Issue SSL Cert
+sudo certbot --nginx -d glennraya.com
+
+// SSH Config file (keep ssh-agent active)
+User git
+Hostname github.com
+IdentityFile ~/.ssh/id_github
+TCPKeepAlive yes
+IdentitiesOnly yes
+ServerAliveInterval 60
