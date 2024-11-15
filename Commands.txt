@@ -1,14 +1,14 @@
 # Configure SSH Access
-sudo -u username mkdir -p /home/username/.ssh
-sudo -u username chmod 700 /home/username/.ssh
+sudo -u your-username mkdir -p /home/your-username/.ssh
+sudo -u your-username chmod 700 /home/your-username/.ssh
 
-sudo chown -R username:username /home/username/.ssh
+sudo chown -R your-username:your-username /home/your-username/.ssh
 
-sudo -u username touch /home/username/.ssh/authorized_keys
-sudo -u username chmod 600 /home/username/.ssh/authorized_keys
+sudo -u your-username touch /home/your-username/.ssh/authorized_keys
+sudo -u your-username chmod 600 /home/your-username/.ssh/authorized_keys
 
-sudo chmod 755 /home/username
-sudo chown username:username /home/username
+sudo chmod 755 /home/your-username
+sudo chown your-username:your-username /home/your-username
 
 // Create SUDO User
 adduser username
