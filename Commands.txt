@@ -68,6 +68,29 @@ sudo chgrp -R www-data storage bootstrap/cache
 
 sudo chmod -R ug+rwx storage bootstrap/cache
 
+// Install Nginx Server and Configure Virtual Host aka Server Blocks:
+sudo apt install nginx
+
+// Configure Server Blocks for your website in Nginx.
+// Navigate to the directory /etc/nginx/sites-available to create a server block file.
+cd /etc/nginx/sites-available
+sudo vim example.com # Replace the example.com with your website or web app domain.
+
+// Go to laravel.com, search for nginx site configuration, scroll down, copy the server configuration code, and paste it into the vim server block file.
+// Replace the server_name which is example.com with your site domain
+// Replace the root path /srv/example.com/public with your site Laravel public directory path.
+
+# note: Scroll down in the same vim file and look for php-fpm which should match the PHP version installed on your server where the app is deployed.
+//Save the file and exit it from vim.
+// Now create a symbolic link for the server block that we just created.
+cd /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled # Replace the example.com with the domain name for which we just created a server block.
+
+// Test the nginx server for any issues or errors.
+sudo nginx -t
+
+// Restart the nginx server and then access your website or web app
+sudo systemctl restart nginx
+
 // Install Certbot
 sudo apt install certbot python3-certbot-nginx
 
